@@ -1,0 +1,16 @@
+<div className="header">
+  stuff to do
+</div>
+<div className="add-container">
+  <input type="text" id="txtTodo" placeholder="what do you need to do?" value="" />
+  <input type="button" id="btnAdd" className="btn" (click)="addTodo()" value="add todo" />
+</div>
+<li *ngFor="let todo of todos">
+  <app-todo [todo]="todo"></app-todo>
+</li>
+<!-- <TodoList todos={this.props.todos} />
+{
+  this.props.todos.length ?
+  <ConfirmBtn buttonText="Clear all your todos?" action={this.clearAll} />
+  : null
+} -->
