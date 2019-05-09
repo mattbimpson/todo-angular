@@ -17,6 +17,8 @@ export class MainComponent implements OnInit {
     window.alert('add todo');
   }
 
-  todos: Todo[] = [{ id: 0, text: 'first item'}, { id: 1, text: 'second' }];
+  name: string = "";
+
+  todos: Todo[] = [{ id: 0, text: 'first item', completed: false }, { id: 1, text: 'second', completed: false }];
 
 }

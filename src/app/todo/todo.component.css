@@ -1,0 +1,25 @@
+.todo-container .completed {
+    text-decoration: line-through;
+    color: darkgray;
+    background-color: darkgreen;
+    border-radius: 5px;
+}
+
+.todo-item, .todo-controls {
+    display: block;
+}
+
+.todo-controls {
+    font-size: small;
+}
+
+.todo-container {
+    border-radius: 5px;
+    background: darkgray;
+    margin-top: 5px;
+    width: 600px;
+}
+
+.btn {
+    border-radius: 5px;
+}

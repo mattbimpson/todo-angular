@@ -1,13 +1,13 @@
-<div className="header">
+<div class="header">
   stuff to do
 </div>
-<div className="add-container">
-  <input type="text" id="txtTodo" placeholder="what do you need to do?" value="" />
-  <input type="button" id="btnAdd" className="btn" (click)="addTodo()" value="add todo" />
+<div class="add-container">
+  <input type="text" id="txtTodo" placeholder="what do you need to do?" [(ngModel)]="txtAdd" #ctrl="ngModel" />
+  <input type="button" id="btnAdd" class="btn" (click)="addTodo()" value="add todo" />
 </div>
-<li *ngFor="let todo of todos">
+<ul *ngFor="let todo of todos">
   <app-todo [todo]="todo"></app-todo>
-</li>
+</ul>
 <!-- <TodoList todos={this.props.todos} />
 {
   this.props.todos.length ?

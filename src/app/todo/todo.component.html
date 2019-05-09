@@ -1,3 +1,11 @@
-<p>
-  {{todo.text}}
-</p>
+<div class="todo-container">
+  <div [ngClass]="{'completed': todo.completed}">
+    <div class='todo-item'>
+        {{todo.text}}
+    </div>
+    <div class='todo-controls'>
+        done <input type="checkbox" [(ngModel)]="todo.completed" (change)="completedChanged()" />
+        <!-- <input type="button" class="btn" value="remove" @click="remove" /> -->
+    </div>
+  </div>
+</div>

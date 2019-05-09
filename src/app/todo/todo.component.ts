@@ -15,4 +15,8 @@ export class TodoComponent implements OnInit {
 
   @Input() todo:Todo;
 
+  completedChanged() {
+    
+  }
+
 }
