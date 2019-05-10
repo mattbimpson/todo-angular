@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../todo';
-import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { AddTodo } from '../store/actions';
-import { TodoState } from '../store/initialState';
+// import { Store, select } from '@ngrx/store';
+// import { Observable } from 'rxjs';
+// import { AddTodo } from '../store/actions';
+// import { TodoState } from '../store/initialState';
 
 @Component({
   selector: 'app-main',
@@ -29,10 +29,25 @@ export class MainComponent implements OnInit {
     //this.store.dispatch(new AddTodo({todo: todo}));
 
     this.todos.push(todo);
+    this.txtAdd = "";
   }
 
   confirmEventReceived() {
-    window.alert('confirm event');
+    this.todos = [];
+  }
+
+  removeTodo(id: number) {
+    this.todos = this.todos.filter(x => x.id !== id);
+  }
+
+  todoId(index: number, todo: Todo) {
+    return todo.id;
+  }
+
+  onKeydown(event) {
+    if (event.key === "Enter") {
+      this.addTodo();
+    }
   }
 
   txtAdd: string = "";

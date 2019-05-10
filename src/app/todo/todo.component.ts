@@ -17,7 +17,6 @@ export class TodoComponent implements OnInit {
   @Output() removed = new EventEmitter<number>();
 
   remove(id: number) {
-    window.alert(id);
     this.removed.emit(id);
   }
 
