@@ -25,7 +25,7 @@ export class MainComponent implements OnInit {
     const todo = new Todo();
     todo.text = this.txtAdd;
     todo.completed = false;
-    todo.id = 0;
+    todo.id = this.todos.length ? this.todos[this.todos.length - 1].id + 1 : 0;
     //this.store.dispatch(new AddTodo({todo: todo}));
 
     this.todos.push(todo);
