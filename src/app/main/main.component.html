@@ -3,7 +3,7 @@
 </div>
 <div class="add-container">
   <input type="text" id="txtTodo" placeholder="what do you need to do?" [(ngModel)]="txtAdd" #ctrl="ngModel" />
-  <input type="button" id="btnAdd" class="btn" (click)="addTodo()" value="add todo" />
+  <input type="button" id="btnAdd" class="btn" (click)="addTodo()" value="add todo" [disabled]="!txtAdd" />
 </div>
 <ul *ngFor="let todo of todos">
   <app-todo [todo]="todo"></app-todo>

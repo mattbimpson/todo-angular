@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { TodoComponent } from './todo/todo.component';
 import { MainComponent } from './main/main.component';
 
+import { StoreModule } from '@ngrx/store';
+import { reducer } from './store/reducer';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -14,7 +17,8 @@ import { MainComponent } from './main/main.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    StoreModule.forRoot({ todos: reducer })
   ],
   providers: [],
   bootstrap: [AppComponent]
