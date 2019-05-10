@@ -3,6 +3,7 @@ import { Todo } from '../todo';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AddTodo } from '../store/actions';
+import { TodoState } from '../store/initialState';
 
 @Component({
   selector: 'app-main',
@@ -11,14 +12,13 @@ import { AddTodo } from '../store/actions';
 })
 export class MainComponent implements OnInit {
 
-  //todos: Observable<Todo[]>
+  todos: Todo[] = [];
+  //todoListState$: Observable<Todo[]>;
 
-  // constructor(private store: Store<Todo[]>) {
-  //   this.todos = store.pipe(select('todos'));
-  // }
+  //constructor(private store: Store<TodoState>) {}
 
   ngOnInit() {
-    //this.store.select('todos').subscribe(data => this.todos = data)
+    //this.todoListState$ = this.store.select(state => state.todos);
   }
 
   addTodo() {
@@ -31,9 +31,9 @@ export class MainComponent implements OnInit {
     this.todos.push(todo);
   }
 
+  confirmEventReceived() {
+    window.alert('confirm event');
+  }
+
   txtAdd: string = "";
-
-  todos: Todo[] = [];
-
-  // todos: Todo[] = [{ id: 0, text: 'first item', completed: false }, { id: 1, text: 'second', completed: false }];
 }

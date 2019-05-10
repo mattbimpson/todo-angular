@@ -1,5 +1,5 @@
 import { Todo } from '../todo';
 
-export default {
-    todos: Array<Todo>()
+export interface TodoState {
+    todos: Array<Todo>
 }

@@ -5,7 +5,7 @@
     </div>
     <div class='todo-controls'>
         done <input type="checkbox" [(ngModel)]="todo.completed" (change)="completedChanged()" />
-        <input type="button" class="btn" value="remove" (click)="remove()" />
+        <input type="button" class="btn" value="remove" (click)="remove(todo.id)" />
     </div>
   </div>
 </div>

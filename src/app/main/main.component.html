@@ -14,3 +14,6 @@
   <ConfirmBtn buttonText="Clear all your todos?" action={this.clearAll} />
   : null
 } -->
+<div *ngIf="todos.length">
+  <app-confirm-btn [buttonText]="'Clear all your todos?'" (confirmOut)="confirmEventReceived($event)"></app-confirm-btn>
+</div>

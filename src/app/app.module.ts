@@ -8,12 +8,14 @@ import { MainComponent } from './main/main.component';
 
 import { StoreModule } from '@ngrx/store';
 import { reducer } from './store/reducer';
+import { ConfirmBtnComponent } from './confirm-btn/confirm-btn.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TodoComponent,
-    MainComponent
+    MainComponent,
+    ConfirmBtnComponent
   ],
   imports: [
     BrowserModule,

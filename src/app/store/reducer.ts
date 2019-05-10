@@ -1,7 +1,12 @@
 import { Action } from '@ngrx/store'
 import * as a from './actions'
-import initialState from './initialState'
+import { TodoState } from './initialState'
 import { AddTodo } from './actions'
+//import { Todo } from '../todo';
+
+const initialState : TodoState = {
+  todos: []
+}
  
 export function reducer(state = initialState, action: AddTodo) {
   switch (action.type) {

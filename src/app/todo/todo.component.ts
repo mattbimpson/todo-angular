@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Todo } from '../todo';
 
 @Component({
@@ -14,9 +14,11 @@ export class TodoComponent implements OnInit {
   }
 
   @Input() todo:Todo;
+  @Output() removed = new EventEmitter<number>();
 
-  remove() {
-    
+  remove(id: number) {
+    window.alert(id);
+    this.removed.emit(id);
   }
 
 }
