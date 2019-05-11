@@ -2,8 +2,8 @@ image: atlassianlabs/docker-node-jdk-chrome-firefox
 pipelines:
   default:
     - step:
-      caches:
-        - node
-      script:
-        - npm install
-        - npm test
+        caches:
+          - node
+        script:
+          - npm install
+          - npm test
