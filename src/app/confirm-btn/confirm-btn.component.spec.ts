@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ConfirmBtnComponent } from './confirm-btn.component';
 
-fdescribe('ConfirmBtnComponent', () => {
+describe('ConfirmBtnComponent', () => {
   let component: ConfirmBtnComponent;
   let fixture: ComponentFixture<ConfirmBtnComponent>;
 
