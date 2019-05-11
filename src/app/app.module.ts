@@ -6,8 +6,8 @@ import { AppComponent } from './app.component';
 import { TodoComponent } from './todo/todo.component';
 import { MainComponent } from './main/main.component';
 
-import { StoreModule } from '@ngrx/store';
-import { reducer } from './store/reducer';
+// import { StoreModule } from '@ngrx/store';
+// import { reducer } from './store/reducer';
 import { ConfirmBtnComponent } from './confirm-btn/confirm-btn.component';
 
 @NgModule({
@@ -20,7 +20,7 @@ import { ConfirmBtnComponent } from './confirm-btn/confirm-btn.component';
   imports: [
     BrowserModule,
     FormsModule,
-    StoreModule.forRoot({ todos: reducer })
+    // StoreModule.forRoot({ todos: reducer })
   ],
   providers: [],
   bootstrap: [AppComponent]

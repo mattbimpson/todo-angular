@@ -1,23 +1,18 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { MainComponent } from './main/main.component';
 import { FormsModule } from '@angular/forms';
-import { TodoComponent } from './todo/todo.component';
-import { Input, Output } from '@angular/core';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
-        Input,
-        Output
       ],
       declarations: [
         AppComponent,
-        MainComponent,
-        TodoComponent
       ],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   }));
 
