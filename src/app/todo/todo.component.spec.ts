@@ -4,7 +4,7 @@ import { TodoComponent } from './todo.component';
 import { FormsModule } from '@angular/forms';
 import { Todo } from '../todo';
 
-describe('TodoComponent', () => {
+fdescribe('TodoComponent', () => {
   let component: TodoComponent;
   let fixture: ComponentFixture<TodoComponent>;
 
@@ -29,4 +29,11 @@ describe('TodoComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should apply completed css when todo completed is true', () => {
+    component.todo.completed = true;
+    fixture.detectChanges();
+    const completedItem = fixture.nativeElement.querySelector('.completed');
+    expect(completedItem).not.toBeNull();
+  })
 });
