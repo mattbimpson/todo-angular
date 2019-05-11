@@ -13,12 +13,13 @@ import { Todo } from '../todo';
 export class MainComponent implements OnInit {
 
   todos: Todo[] = [];
-  //todoListState$: Observable<Todo[]>;
+  txtAdd = '';
+  // todoListState$: Observable<Todo[]>;
 
-  //constructor(private store: Store<TodoState>) {}
+  // constructor(private store: Store<TodoState>) {}
 
   ngOnInit() {
-    //this.todoListState$ = this.store.select(state => state.todos);
+    // this.todoListState$ = this.store.select(state => state.todos);
   }
 
   addTodo() {
@@ -26,10 +27,10 @@ export class MainComponent implements OnInit {
     todo.text = this.txtAdd;
     todo.completed = false;
     todo.id = this.todos.length ? this.todos[this.todos.length - 1].id + 1 : 0;
-    //this.store.dispatch(new AddTodo({todo: todo}));
+    // this.store.dispatch(new AddTodo({todo: todo}));
 
     this.todos.push(todo);
-    this.txtAdd = "";
+    this.txtAdd = '';
   }
 
   confirmEventReceived() {
@@ -45,10 +46,8 @@ export class MainComponent implements OnInit {
   }
 
   onKeydown(event) {
-    if (event.key === "Enter") {
+    if (event.key === 'Enter') {
       this.addTodo();
     }
   }
-
-  txtAdd: string = "";
 }

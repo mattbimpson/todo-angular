@@ -10,11 +10,11 @@ export class TodoComponent implements OnInit {
 
   constructor() { }
 
+  @Input() todo: Todo;
+  @Output() removed = new EventEmitter<number>();
+
   ngOnInit() {
   }
-
-  @Input() todo:Todo;
-  @Output() removed = new EventEmitter<number>();
 
   remove(id: number) {
     this.removed.emit(id);

@@ -7,24 +7,23 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ConfirmBtnComponent implements OnInit {
 
+  @Input() buttonText: string;
+  @Output() confirmOut: EventEmitter<any> = new EventEmitter();
+  confirming = false;
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  @Input() buttonText: string;
-  @Output() confirmOut: EventEmitter<any> = new EventEmitter();
-
-  confirming: boolean = false;
-
-  toggleConfirm () {
-    this.confirming = !this.confirming
+  toggleConfirm() {
+    this.confirming = !this.confirming;
   }
-  confirmYes () {
+  confirmYes() {
       this.confirmOut.emit(null);
-      this.toggleConfirm()
+      this.toggleConfirm();
   }
-  confirmNo () {
-      this.toggleConfirm()
+  confirmNo() {
+      this.toggleConfirm();
   }
 }
