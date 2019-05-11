@@ -3,8 +3,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { TodoComponent } from './todo.component';
 import { FormsModule } from '@angular/forms';
 import { Todo } from '../todo';
+import { By } from '@angular/platform-browser';
 
-fdescribe('TodoComponent', () => {
+describe('TodoComponent', () => {
   let component: TodoComponent;
   let fixture: ComponentFixture<TodoComponent>;
 
@@ -35,5 +36,13 @@ fdescribe('TodoComponent', () => {
     fixture.detectChanges();
     const completedItem = fixture.nativeElement.querySelector('.completed');
     expect(completedItem).not.toBeNull();
+  })
+
+  it('should call remove() when remove button clicked', () => {
+    spyOn(component, 'remove');
+    const btnRemove = fixture.debugElement.query(By.css('input[type=button]'));
+    btnRemove.triggerEventHandler('click', null);
+    fixture.detectChanges();
+    expect(component.remove).toHaveBeenCalled();
   })
 });
