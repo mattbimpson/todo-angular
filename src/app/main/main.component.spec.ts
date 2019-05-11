@@ -4,9 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { TodoComponent } from '../todo/todo.component';
 import { ConfirmBtnComponent } from '../confirm-btn/confirm-btn.component';
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-import { addTodo } from '../store/actions';
-import { Todo } from '../todo';
 
 describe('MainComponent', () => {
   let component: MainComponent;
