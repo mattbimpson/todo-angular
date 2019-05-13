@@ -1,4 +1,4 @@
-image: angular/ngcontainer
+image: avatsaev/angular-chrome-headless
 pipelines:
   default:
     - step:
@@ -6,5 +6,5 @@ pipelines:
           - node
         script:
           - npm install
-          - npm build
+          - npm run-script build
           - npm test
