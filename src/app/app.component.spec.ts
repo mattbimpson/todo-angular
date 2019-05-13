@@ -22,9 +22,9 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'todo app'`, () => {
+  it(`should have as title 'Angular Todo'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('todo app');
+    expect(app.title).toEqual('Angular Todo');
   });
 });

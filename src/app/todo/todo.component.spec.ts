@@ -21,7 +21,7 @@ describe('TodoComponent', () => {
     fixture = TestBed.createComponent(TodoComponent);
     component = fixture.componentInstance;
     const todo = new Todo();
-    todo.id = 0;
+    todo.id = 'a_test_todo';
     todo.text = 'new todo';
     component.todo = todo;
     fixture.detectChanges();

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../todo';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 // import { Store, select } from '@ngrx/store';
 // import { Observable } from 'rxjs';
 // import { AddTodo } from '../store/actions';
@@ -11,6 +13,13 @@ import { Todo } from '../todo';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
+  data: Observable<any[]>;
+  constructor(public db: AngularFirestore) {
+    db.collection('todos').valueChanges()
+      .subscribe((res: Todo[]) => {
+        this.todos = res;
+    });
+  }
 
   todos: Todo[] = [];
   txtAdd = '';
@@ -22,22 +31,27 @@ export class MainComponent implements OnInit {
     // this.todoListState$ = this.store.select(state => state.todos);
   }
 
-  addTodo() {
+  async addTodo() {
     const todo = new Todo();
     todo.text = this.txtAdd;
     todo.completed = false;
-    todo.id = this.todos.length ? this.todos[this.todos.length - 1].id + 1 : 0;
+    todo.id = this.db.createId();
     // this.store.dispatch(new AddTodo({todo: todo}));
-
-    this.todos.push(todo);
-    this.txtAdd = '';
+    
+    await this.db.collection<Todo>('todos').add({...todo})
+      .then(() => {
+          this.txtAdd = '';
+      })
+      .catch((error) => {
+        alert(error);
+      });
   }
 
   confirmEventReceived() {
     this.todos = [];
   }
 
-  removeTodo(id: number) {
+  removeTodo(id: string) {
     this.todos = this.todos.filter(x => x.id !== id);
   }
 
