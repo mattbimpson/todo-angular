@@ -1,4 +1,4 @@
-image: avatsaev/angular-chrome-headless
+image: atlassianlabs/docker-node-jdk-chrome-firefox
 pipelines:
   default:
     - step:
