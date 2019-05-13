@@ -1,4 +1,4 @@
-image: atlassianlabs/docker-node-jdk-chrome-firefox
+image: angular/ngcontainer
 pipelines:
   default:
     - step:
@@ -6,4 +6,5 @@ pipelines:
           - node
         script:
           - npm install
+          - ng build
           - npm test
