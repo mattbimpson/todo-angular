@@ -6,5 +6,5 @@ pipelines:
           - node
         script:
           - npm install
-          - ng build
+          - npm build
           - npm test
