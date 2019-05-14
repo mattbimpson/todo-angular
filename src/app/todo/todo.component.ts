@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Todo } from '../todo';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-todo',
@@ -8,7 +9,7 @@ import { Todo } from '../todo';
 })
 export class TodoComponent implements OnInit {
 
-  constructor() { }
+  constructor(public db: AngularFirestore) { }
 
   @Input() todo: Todo;
   @Output() removed = new EventEmitter<string>();
@@ -20,4 +21,7 @@ export class TodoComponent implements OnInit {
     this.removed.emit(id);
   }
 
+  completedChanged() {
+    this.todo.completed = !this.todo.completed;
+  }
 }

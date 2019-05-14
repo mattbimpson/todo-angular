@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../todo';
-import { AngularFirestore, AngularFirestoreDocument, DocumentChangeAction } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore';
+import { FirebaseService } from '../services/firebase-service';
+//import { Observable } from 'rxjs';
 // import { Store, select } from '@ngrx/store';
 // import { Observable } from 'rxjs';
 // import { AddTodo } from '../store/actions';
@@ -13,15 +14,14 @@ import { Observable } from 'rxjs';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  constructor(public db: AngularFirestore) {
-    db.collection('todos').snapshotChanges().subscribe(res => {
-      this.items = res;
+  constructor(public firebaseService: FirebaseService) {
+    this.firebaseService.getTodos().subscribe(res => {
+      this.todos = res;
     })
   }
 
-  todos: Todo[] = [];
   txtAdd = '';
-  items: Array<any>;
+  todos: Array<any>;
   
   // todoListState$: Observable<Todo[]>;
 
@@ -31,35 +31,20 @@ export class MainComponent implements OnInit {
     // this.todoListState$ = this.store.select(state => state.todos);
   }
 
-  async addTodo() {
+  addTodo() {
     const todo = new Todo();
     todo.text = this.txtAdd;
     todo.completed = false;
-    todo.id = this.db.createId();
-    
-    // this.store.dispatch(new AddTodo({todo: todo}));
-    
-    await this.db.collection<Todo>('todos').add({...todo})
-      .then((res) => {
-          this.txtAdd = '';
-      })
-      .catch((error) => {
-        alert(error);
-      });
+    this.firebaseService.addTodo(todo);
+    this.txtAdd = '';
   }
 
   confirmEventReceived() {
-    this.todos = [];
+    this.firebaseService.removeAll(this.todos);
   }
 
   async removeTodo(id: string) {
-    for(let i = 0; i < this.items.length; i++) {
-      let item = this.items[i];
-      if (item.payload.doc.data().id === id) {
-        await this.db.collection<Todo>('todos').doc(item.payload.doc.id).delete()
-          .catch((error) => { console.error(error) });
-      }
-    }
+    await this.firebaseService.removeTodo(id, this.todos);
   }
 
   todoId(index: number, todo: DocumentChangeAction<Todo>) {
@@ -70,5 +55,9 @@ export class MainComponent implements OnInit {
     if (event.key === 'Enter') {
       this.addTodo();
     }
+  }
+
+  async removeAll() {
+    await this.firebaseService.removeAll(this.todos);
   }
 }
