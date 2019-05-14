@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../todo';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument, DocumentChangeAction } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 // import { Store, select } from '@ngrx/store';
 // import { Observable } from 'rxjs';
@@ -13,16 +13,16 @@ import { Observable } from 'rxjs';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  data: Observable<any[]>;
   constructor(public db: AngularFirestore) {
-    db.collection('todos').valueChanges()
-      .subscribe((res: Todo[]) => {
-        this.todos = res;
-    });
+    db.collection('todos').snapshotChanges().subscribe(res => {
+      this.items = res;
+    })
   }
 
   todos: Todo[] = [];
   txtAdd = '';
+  items: Array<any>;
+  
   // todoListState$: Observable<Todo[]>;
 
   // constructor(private store: Store<TodoState>) {}
@@ -36,10 +36,11 @@ export class MainComponent implements OnInit {
     todo.text = this.txtAdd;
     todo.completed = false;
     todo.id = this.db.createId();
+    
     // this.store.dispatch(new AddTodo({todo: todo}));
     
     await this.db.collection<Todo>('todos').add({...todo})
-      .then(() => {
+      .then((res) => {
           this.txtAdd = '';
       })
       .catch((error) => {
@@ -51,12 +52,18 @@ export class MainComponent implements OnInit {
     this.todos = [];
   }
 
-  removeTodo(id: string) {
-    this.todos = this.todos.filter(x => x.id !== id);
+  async removeTodo(id: string) {
+    for(let i = 0; i < this.items.length; i++) {
+      let item = this.items[i];
+      if (item.payload.doc.data().id === id) {
+        await this.db.collection<Todo>('todos').doc(item.payload.doc.id).delete()
+          .catch((error) => { console.error(error) });
+      }
+    }
   }
 
-  todoId(index: number, todo: Todo) {
-    return todo.id;
+  todoId(index: number, todo: DocumentChangeAction<Todo>) {
+    return todo.payload.doc.data().id;
   }
 
   onKeydown(event) {

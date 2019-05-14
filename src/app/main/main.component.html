@@ -5,8 +5,8 @@
   <input type="text" id="txtTodo" placeholder="what do you need to do?" [(ngModel)]="txtAdd" #ctrl="ngModel" (keydown)="onKeydown($event)" />
   <input type="button" id="btnAdd" class="btn" (click)="addTodo()" value="add todo" [disabled]="!txtAdd" />
 </div>
-<ul *ngFor="let todo of todos trackBy:todoId">
-  <app-todo [todo]="todo" (removed)="removeTodo($event)"></app-todo>
+<ul *ngFor="let item of items trackBy:todoId">
+  <app-todo [todo]="item.payload.doc.data()" (removed)="removeTodo($event)"></app-todo>
 </ul>
 <div *ngIf="todos.length">
   <app-confirm-btn [buttonText]="'Clear all your todos?'" (confirmOut)="confirmEventReceived($event)"></app-confirm-btn>
