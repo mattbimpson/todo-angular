@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../todo';
 import { FirebaseService } from '../services/firebase-service';
-//import { Observable } from 'rxjs';
-// import { Store, select } from '@ngrx/store';
-// import { Observable } from 'rxjs';
-// import { AddTodo } from '../store/actions';
-// import { TodoState } from '../store/initialState';
 
 @Component({
   selector: 'app-main',
@@ -17,13 +12,8 @@ export class MainComponent implements OnInit {
 
   txtAdd = '';
   todos: Todo[] = [];
-  
-  // todoListState$: Observable<Todo[]>;
-
-  // constructor(private store: Store<TodoState>) {}
 
   async ngOnInit() {
-    // this.todoListState$ = this.store.select(state => state.todos);
     await this.firebaseService.getTodos().then(res => {
       res.subscribe(todos => {
         this.todos = todos.map(x => x.payload.doc.data() as Todo);
@@ -40,7 +30,7 @@ export class MainComponent implements OnInit {
   }
 
   confirmEventReceived() {
-    this.firebaseService.removeAll(this.todos);
+    this.firebaseService.removeAll();
   }
 
   async removeTodo(id: string) {
@@ -55,9 +45,5 @@ export class MainComponent implements OnInit {
     if (event.key === 'Enter') {
       this.addTodo();
     }
-  }
-
-  async removeAll() {
-    await this.firebaseService.removeAll(this.todos);
   }
 }

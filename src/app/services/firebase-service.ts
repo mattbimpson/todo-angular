@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Todo } from '../todo';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +11,11 @@ export class FirebaseService {
   }
 
   async getTodos() {
-    // let todos: Todo[];
     return await this.db.collection('todos').snapshotChanges();
   }
 
   async addTodo(todo: Todo) {
     todo.id = this.db.createId();
-    
-    // this.store.dispatch(new AddTodo({todo: todo}));
     
     await this.db.collection<Todo>('todos').add({...todo})
       .catch((error) => {
@@ -37,11 +33,12 @@ export class FirebaseService {
     }
   }
 
-  async removeAll(todos: Array<any>) {
-    for(let i = 0; i < todos.length; i++) {
-      let item = todos[i];
-      await this.db.collection<Todo>('todos').doc(item.payload.doc.id).delete()
+  async removeAll() {
+    await this.db.collection<Todo>('todos').snapshotChanges().subscribe(res => {
+      res.forEach(async x => {
+        await this.db.collection<Todo>('todos').doc(x.payload.doc.id).delete()
           .catch((error) => { console.error(error) });
-    }
+      });
+    });
   }
 }
