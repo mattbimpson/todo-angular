@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore';
 import { Todo } from '../todo';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,10 @@ export class FirebaseService {
   constructor(public db: AngularFirestore) {
   }
 
-  getTodos = () => this.db.collection('todos').snapshotChanges();
+  async getTodos() {
+    // let todos: Todo[];
+    return await this.db.collection('todos').snapshotChanges();
+  }
 
   async addTodo(todo: Todo) {
     todo.id = this.db.createId();

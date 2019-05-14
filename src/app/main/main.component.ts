@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../todo';
-import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore';
 import { FirebaseService } from '../services/firebase-service';
 //import { Observable } from 'rxjs';
 // import { Store, select } from '@ngrx/store';
@@ -14,21 +13,22 @@ import { FirebaseService } from '../services/firebase-service';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  constructor(public firebaseService: FirebaseService) {
-    this.firebaseService.getTodos().subscribe(res => {
-      this.todos = res;
-    })
-  }
+  constructor(public firebaseService: FirebaseService) {}
 
   txtAdd = '';
-  todos: Array<any>;
+  todos: Todo[] = [];
   
   // todoListState$: Observable<Todo[]>;
 
   // constructor(private store: Store<TodoState>) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     // this.todoListState$ = this.store.select(state => state.todos);
+    await this.firebaseService.getTodos().then(res => {
+      res.subscribe(todos => {
+        this.todos = todos.map(x => x.payload.doc.data() as Todo);
+      });
+    })
   }
 
   addTodo() {
@@ -47,8 +47,8 @@ export class MainComponent implements OnInit {
     await this.firebaseService.removeTodo(id, this.todos);
   }
 
-  todoId(index: number, todo: DocumentChangeAction<Todo>) {
-    return todo.payload.doc.data().id;
+  todoId(index: number, todo: Todo) {
+    return todo.id;
   }
 
   onKeydown(event) {

@@ -6,7 +6,7 @@
   <input type="button" id="btnAdd" class="btn" (click)="addTodo()" value="add todo" [disabled]="!txtAdd" />
 </div>
 <ul *ngFor="let todo of todos trackBy:todoId">
-  <app-todo [todo]="todo.payload.doc.data()" (removed)="removeTodo($event)"></app-todo>
+  <app-todo [todo]="todo" (removed)="removeTodo($event)"></app-todo>
 </ul>
 <div *ngIf="todos.length">
   <app-confirm-btn [buttonText]="'Clear all your todos?'" (confirmOut)="confirmEventReceived($event)"></app-confirm-btn>
