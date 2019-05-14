@@ -1,8 +1,8 @@
 export default {
-	apiKey: '<your-api-key>',
-	authDomain: '<your-auth-domain>',
-	databaseURL: '<your-database-URL>',
-	projectId: '<your-project-id>',
-	storageBucket: '<your-storage-bucket>',
-	messagingSenderId: '<your-messaging-sender-id>'
+    apiKey: 'AIzaSyAmBAxduaY-EovuyZNuoTPdfZFp2wUrERU',
+    authDomain: 'angular-todo-cfa44.firebaseapp.com',
+    databaseURL: '<your-database-URL>',
+    projectId: 'angular-todo-cfa44',
+    storageBucket: '<your-storage-bucket>',
+    messagingSenderId: '<your-messaging-sender-id>'
 }
