@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../todo';
-import { FirebaseService } from '../services/firebase-service';
+import { TodoState } from '../store/initialState';
+
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import * as actions from '../store/actions';
+
 
 @Component({
   selector: 'app-main',
@@ -8,33 +13,32 @@ import { FirebaseService } from '../services/firebase-service';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  constructor(public firebaseService: FirebaseService) {}
+  constructor(private store: Store<any>) {}
+
+  todoState$: Observable<Todo[]>;
 
   txtAdd = '';
   todos: Todo[] = [];
 
   async ngOnInit() {
-    await this.firebaseService.getTodos().then(res => {
-      res.subscribe(todos => {
-        this.todos = todos.map(x => x.payload.doc.data() as Todo);
-      });
-    })
+    this.todoState$ = this.store.select(state => state.todos);
+    this.store.dispatch(new actions.GetTodos());
   }
 
   addTodo() {
     const todo = new Todo();
     todo.text = this.txtAdd;
     todo.completed = false;
-    this.firebaseService.addTodo(todo);
+    this.store.dispatch(new actions.AddTodo({todo}));
     this.txtAdd = '';
   }
 
   confirmEventReceived() {
-    this.firebaseService.removeAll();
+    // this.firebaseService.removeAll();
   }
 
   async removeTodo(id: string) {
-    await this.firebaseService.removeTodo(id, this.todos);
+    // await this.firebaseService.removeTodo(id, this.todos);
   }
 
   todoId(index: number, todo: Todo) {

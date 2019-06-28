@@ -6,9 +6,10 @@ import { AppComponent } from './app.component';
 import { TodoComponent } from './todo/todo.component';
 import { MainComponent } from './main/main.component';
 import { ConfirmBtnComponent } from './confirm-btn/confirm-btn.component';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { environment } from 'src/environments/environment';
+
+import { StoreModule } from '@ngrx/store'
+import { reducer } from './store/reducer'
+import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 
 @NgModule({
   declarations: [
@@ -20,8 +21,8 @@ import { environment } from 'src/environments/environment';
   imports: [
     BrowserModule,
     FormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
+    StoreModule.forRoot({ todos: reducer }),
+    StoreDevtoolsModule.instrument()
   ],
   providers: [],
   bootstrap: [AppComponent]
