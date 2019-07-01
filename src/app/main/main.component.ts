@@ -20,7 +20,7 @@ export class MainComponent implements OnInit {
   txtAdd = '';
   todos: Todo[] = [];
 
-  async ngOnInit() {
+  ngOnInit() {
     this.todoState$ = this.store.select(state => state.todos);
     this.store.dispatch(new actions.GetTodos());
   }
@@ -34,11 +34,11 @@ export class MainComponent implements OnInit {
   }
 
   confirmEventReceived() {
-    // this.firebaseService.removeAll();
+    this.store.dispatch(new actions.RemoveAll());
   }
 
-  async removeTodo(id: string) {
-    // await this.firebaseService.removeTodo(id, this.todos);
+  removeTodo(id: string) {
+    this.store.dispatch(new actions.RemoveTodo({id}));
   }
 
   todoId(index: number, todo: Todo) {

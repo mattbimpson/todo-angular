@@ -10,8 +10,8 @@
   <ul *ngFor="let todo of todoState.todos trackBy:todoId">
     <app-todo [todo]="todo" (removed)="removeTodo($event)"></app-todo>
   </ul>
-</div>
 
-<div *ngIf="todos.length">
-  <app-confirm-btn [buttonText]="'Clear all your todos?'" (confirmOut)="confirmEventReceived($event)"></app-confirm-btn>
+  <div *ngIf="todoState.todos.length">
+    <app-confirm-btn [buttonText]="'Clear all your todos?'" (confirmOut)="confirmEventReceived($event)"></app-confirm-btn>
+  </div>
 </div>

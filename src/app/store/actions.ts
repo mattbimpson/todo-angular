@@ -1,8 +1,14 @@
-import { Action } from '@ngrx/store';
 import { Todo } from '../todo';
+
+export interface MyAction {
+    type: string
+    payload: any
+}
 
 export const addTodo = 'addTodo';
 export const getTodos = 'getTodos';
+export const removeTodo = 'removeTodo';
+export const removeAll = 'removeAll';
 
 export class AddTodo implements MyAction {
     readonly type = addTodo;
@@ -14,7 +20,12 @@ export class GetTodos implements MyAction {
     constructor(readonly payload: {} = null) {}
 }
 
-export interface MyAction {
-    type: string
-    payload: any
+export class RemoveTodo implements MyAction {
+    readonly type = removeTodo;
+    constructor(readonly payload: { id: String}) {}
+}
+
+export class RemoveAll implements MyAction {
+    readonly type = removeAll;
+    constructor(readonly payload: {} = null) {}
 }
