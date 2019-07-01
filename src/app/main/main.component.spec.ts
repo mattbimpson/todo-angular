@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { TodoComponent } from '../todo/todo.component';
 import { ConfirmBtnComponent } from '../confirm-btn/confirm-btn.component';
 import { By } from '@angular/platform-browser';
-import { FirebaseService } from '../services/firebase-service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { BehaviorSubject } from 'rxjs';
 
@@ -33,12 +32,12 @@ describe('MainComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule],
-      declarations: [ MainComponent, TodoComponent, ConfirmBtnComponent ],
-      providers: [
-        FirebaseService, 
-        AngularFirestore,
-        { provide: AngularFirestore, useValue: FirestoreStub },
-      ]
+      declarations: [ MainComponent, TodoComponent, ConfirmBtnComponent ]
+      // providers: [
+      //   FirebaseService, 
+      //   AngularFirestore,
+      //   { provide: AngularFirestore, useValue: FirestoreStub },
+      // ]
     })
     .compileComponents();
   }));
